@@ -4,95 +4,209 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Redemption Gateway</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       background: radial-gradient(ellipse at center, #0d0d0d 0%, #000000 100%);
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Roboto', 'Orbitron', sans-serif;
       color: #ff3c3c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      cursor: url('https://cdn.jsdelivr.net/gh/ionic-team/ionicons@7.1.0/src/svg/flash-outline.svg') 16 16, pointer;
+    }
+
+    .logo {
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      overflow: hidden;
+      margin-bottom: 30px;
+      animation: logoPop 1.2s cubic-bezier(.4,2,.6,1);
+    }
+    .logo-icon {
+      font-size: 2.8rem;
+      color: #ffb347;
+      margin-right: 15px;
+      filter: drop-shadow(0 0 10px #ffb34799);
+      animation: spin 2.5s linear infinite;
+    }
+    .logo-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: #ff1f1f;
+      text-shadow: 0 0 12px #ff1f1f, 0 0 30px #ffb34744;
+    }
+    @keyframes logoPop {
+      0% { opacity: 0; transform: scale(0.7); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .container {
-      background: rgba(20, 0, 0, 0.3);
-      padding: 50px;
-      border-radius: 15px;
-      box-shadow: 0 0 30px #ff000066, 0 0 80px #ff1a1a33 inset;
+      background: rgba(20, 0, 0, 0.35);
+      padding: 48px 32px 36px 32px;
+      border-radius: 18px;
+      box-shadow: 0 0 40px #ff000066, 0 0 100px #ff1a1a33 inset;
       text-align: center;
       animation: fadeIn 2s ease-in-out;
-      width: 90%;
-      max-width: 500px;
-      backdrop-filter: blur(10px);
+      width: 95%;
+      max-width: 420px;
+      backdrop-filter: blur(12px);
+      position: relative;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #ff1f1f;
-      text-shadow: 0 0 10px #ff1f1f;
-    }
-
-    input[type="text"] {
-      padding: 15px;
+    .form-group {
+      position: relative;
+      margin-bottom: 32px;
       width: 100%;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      background: #1a0000;
+    }
+    .form-input {
+      padding: 18px 16px 18px 16px;
+      width: 100%;
+      border: 2px solid #ffb34744;
+      border-radius: 7px;
+      font-size: 1.08rem;
+      background: #1a0000cc;
       color: #ffb3b3;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px #330000;
+      box-shadow: 0 0 12px #33000033;
       outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
     }
-
-    input[type="text"]:focus {
-      box-shadow: 0 0 15px #ff3333, 0 0 25px #ff1f1f inset;
+    .form-input:focus {
+      border: 2px solid #ffb347;
+      box-shadow: 0 0 18px #ff3333, 0 0 30px #ff1f1f44 inset;
     }
-
-    button {
-      padding: 12px 25px;
-      border: none;
-      border-radius: 5px;
+    .form-label {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      color: #ffb3b3cc;
       font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      background: #ff1a1a;
-      color: #000;
-      box-shadow: 0 0 15px #ff0000aa;
-      transition: all 0.3s ease-in-out;
+      pointer-events: none;
+      background: transparent;
+      transition: 0.2s cubic-bezier(.4,2,.6,1);
+      font-family: 'Orbitron', sans-serif;
+    }
+    .form-input:focus + .form-label,
+    .form-input:not(:placeholder-shown) + .form-label {
+      top: -12px;
+      left: 10px;
+      font-size: 0.92rem;
+      color: #ffb347;
+      background: #0d0d0d;
+      padding: 0 6px;
+      border-radius: 4px;
+      box-shadow: 0 0 6px #ffb34744;
     }
 
-    button:hover {
-      background: #ff0000;
-      box-shadow: 0 0 25px #ff1a1a, 0 0 40px #ff1a1a;
-      transform: scale(1.05);
+    .btn {
+      position: relative;
+      overflow: hidden;
+      padding: 14px 36px;
+      border: none;
+      border-radius: 7px;
+      font-size: 1.08rem;
+      font-weight: bold;
+      cursor: url('https://cdn.jsdelivr.net/gh/ionic-team/ionicons@7.1.0/src/svg/rocket-outline.svg') 16 16, pointer;
+      background: linear-gradient(90deg, #ff1a1a 0%, #ffb347 100%);
+      color: #000;
+      box-shadow: 0 0 18px #ff0000aa, 0 0 50px #ffb34755 inset;
+      transition: all 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+      z-index: 1;
+      outline: none;
+      border: 2px solid #ffb347;
+      animation: buttonGlow 2s infinite alternate;
+      margin-bottom: 10px;
+    }
+    @keyframes buttonGlow {
+      0% { box-shadow: 0 0 18px #ff0000aa, 0 0 50px #ffb34755 inset; }
+      100% { box-shadow: 0 0 36px #ffb347cc, 0 0 100px #ff1a1a99 inset; }
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #ffb347 0%, #ff1a1a 100%);
+      box-shadow: 0 0 50px #ffb347cc, 0 0 100px #ff1a1a99 inset, 0 0 80px #fff19944;
+      transform: scale(1.08) translateY(-2px);
+      border-color: #fff199;
+    }
+    .btn:active {
+      background: linear-gradient(90deg, #ff1a1a 0%, #ffb347 100%);
+      box-shadow: 0 0 12px #ffb347cc, 0 0 30px #ff1a1a99 inset;
+      transform: scale(0.98) translateY(2px);
+      border-color: #ff1a1a;
+    }
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      background: rgba(255, 255, 255, 0.5);
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border: 3px solid #ffb34744;
+      border-top: 3px solid #ffb347;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 8px -6px 0;
+      vertical-align: middle;
     }
 
     .message {
-      margin-top: 25px;
-      font-size: 1rem;
+      margin-top: 28px;
+      font-size: 1.08rem;
       opacity: 0;
-      transition: opacity 0.4s ease-in-out;
+      transition: opacity 0.4s cubic-bezier(.4,2,.6,1), transform 0.4s cubic-bezier(.4,2,.6,1);
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
-
     .message.visible {
       opacity: 1;
+      transform: translateY(0);
     }
-
     .message.success {
       color: #66ff66;
-      text-shadow: 0 0 5px #33ff33;
+      text-shadow: 0 0 7px #33ff33;
+      animation: popSuccess 0.7s cubic-bezier(.4,2,.6,1);
     }
-
     .message.error {
       color: #ff6666;
-      text-shadow: 0 0 5px #ff1a1a;
+      text-shadow: 0 0 7px #ff1a1a;
+      animation: popError 0.7s cubic-bezier(.4,2,.6,1);
+    }
+    @keyframes popSuccess {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes popError {
+      0% { transform: scale(1.2); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .message i {
+      font-size: 1.3em;
+      margin-right: 4px;
     }
 
     @keyframes fadeIn {
@@ -105,43 +219,87 @@
         transform: scale(1);
       }
     }
+
+    .footer {
+      margin-top: 40px;
+      color: #ffb3b3aa;
+      font-size: 0.98rem;
+      text-align: center;
+      letter-spacing: 1px;
+      user-select: none;
+      text-shadow: 0 0 6px #ff1a1a22;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 28px 8px 24px 8px; }
+      .logo-text { font-size: 1.3rem; }
+      .logo-icon { font-size: 1.6rem; }
+    }
   </style>
 </head>
 <body>
+  <div class="logo">
+    <i class="fa-solid fa-shield-halved logo-icon"></i>
+    <span class="logo-text">Redemption Gateway</span>
+  </div>
   <div class="container">
-    <h1>REDEEM ACCESS</h1>
-    <input type="text" id="license" placeholder="Enter your license key...">
-    <button onclick="redeem()">UNLOCK</button>
+    <form id="redeemForm" autocomplete="off" onsubmit="redeem(event)">
+      <div class="form-group">
+        <input type="text" id="license" class="form-input" placeholder=" " maxlength="64" autocomplete="off" required />
+        <label for="license" class="form-label">Enter your license key...</label>
+      </div>
+      <button type="submit" id="lux-btn" class="btn">UNLOCK</button>
+    </form>
     <div class="message" id="messageBox"></div>
   </div>
-
+  <div class="footer">
+    &copy; 2025 Redemption Gateway. All rights reserved.
+  </div>
   <script>
-    function redeem() {
+    // Professional redeem logic
+    function redeem(e) {
+      e.preventDefault();
       const license = document.getElementById('license').value.trim();
       const messageBox = document.getElementById('messageBox');
-
-      messageBox.classList.remove('success', 'error', 'visible');
-
+      messageBox.className = 'message';
+      messageBox.innerHTML = '';
       if (!license) {
-        messageBox.textContent = "You must enter a license key.";
+        messageBox.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> You must enter a license key.';
         messageBox.classList.add('error', 'visible');
         return;
       }
-
-      // Simulate a real check
-      messageBox.textContent = "Checking license...";
+      messageBox.innerHTML = '<span class="spinner"></span>Checking license...';
       messageBox.classList.add('visible');
-
       setTimeout(() => {
         if (license.toLowerCase() === 'valid-key') {
-          messageBox.textContent = "Access granted.";
+          messageBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> Access granted.';
           messageBox.classList.add('success');
         } else {
-          messageBox.textContent = "Invalid license key.";
+          messageBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Invalid license key.';
           messageBox.classList.add('error');
         }
       }, 1500);
     }
+    // Ripple effect for button
+    const luxBtn = document.getElementById('lux-btn');
+    luxBtn.addEventListener('click', function(e) {
+      const btn = this;
+      const circle = document.createElement('span');
+      circle.classList.add('ripple');
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      circle.style.width = circle.style.height = size + 'px';
+      circle.style.left = (e.clientX - rect.left - size/2) + 'px';
+      circle.style.top = (e.clientY - rect.top - size/2) + 'px';
+      btn.appendChild(circle);
+      setTimeout(() => circle.remove(), 600);
+    });
+    // Enter key submits form
+    document.getElementById('license').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('lux-btn').click();
+      }
+    });
   </script>
 </body>
 </html>
