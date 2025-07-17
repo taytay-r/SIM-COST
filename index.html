@@ -329,6 +329,60 @@
       color: #66ff66;
       margin-top: 4px;
     }
+    .expiry-timer {
+      font-size: 1.08rem;
+      color: #fff;
+      background: #00330044;
+      border-radius: 8px;
+      padding: 8px 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 8px #00ff9922;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .sms-code-box {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .sms-input {
+      width: 180px;
+      padding: 8px 12px;
+      font-size: 1.08rem;
+      border-radius: 7px;
+      border: 2px solid #66ff66;
+      background: #002200cc;
+      color: #66ff66;
+      text-align: center;
+      margin-top: 4px;
+      box-shadow: 0 0 8px #00ff9922;
+    }
+    .review-btn {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 28px;
+      font-size: 1.08rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(90deg, #66ff66 0%, #00ff99 100%);
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 0 18px #00ff99aa, 0 0 50px #66ff6655 inset;
+      border: 2px solid #66ff66;
+      transition: all 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+      outline: none;
+      cursor: pointer;
+    }
+    .review-btn:hover {
+      background: linear-gradient(90deg, #00ff99 0%, #66ff66 100%);
+      box-shadow: 0 0 50px #00ff99cc, 0 0 100px #66ff6699 inset, 0 0 80px #fff19944;
+      color: #003300;
+      border-color: #fff199;
+    }
   </style>
 </head>
 <body>
@@ -352,19 +406,27 @@
     &copy; 2025 Redemption Gateway. All rights reserved.
   </div>
   <script>
-    function showWooshAndSimInfo(simInfo) {
+    function showWooshAndSimInfo(simInfo, license) {
       const messageBox = document.getElementById('messageBox');
       messageBox.innerHTML = '';
       messageBox.className = 'message success';
 
-      // Create woosh animation
+      // Timer
+      let expiry = simInfo.expires_in || 1200;
+      const timerDiv = document.createElement('div');
+      timerDiv.className = 'expiry-timer';
+      timerDiv.innerHTML = `<i class='fa-regular fa-clock'></i> <span id='timer-count'>${expiry}</span> seconds until expiry`;
+      messageBox.appendChild(timerDiv);
+
+      // Woosh animation
       const woosh = document.createElement('div');
       woosh.className = 'woosh-anim';
       messageBox.appendChild(woosh);
 
+      // After woosh, show info
       setTimeout(() => {
         woosh.style.opacity = '0';
-        // Show phone number and code box
+        // Phone number and SMS code box
         const infoBox = document.createElement('div');
         infoBox.className = 'sim-info-box';
         infoBox.innerHTML = `
@@ -373,13 +435,46 @@
             <span>Phone Number:</span>
             <span class='sim-num'>+${simInfo.cc} ${simInfo.phonenumber}</span>
           </div>
-          <div class='sim-send-box'>
-            <span>Code will be sent to:</span>
-            <span class='sim-num'>+${simInfo.cc} ${simInfo.phonenumber}</span>
+          <div class='sms-code-box'>
+            <span>SMS code will arrive here:</span>
+            <input type='text' class='sms-input' id='smsInput' placeholder='Waiting for code...' readonly />
           </div>
         `;
         messageBox.appendChild(infoBox);
+
+        // Simulate code arrival after 5 seconds (replace with real API if available)
+        setTimeout(() => {
+          const smsInput = document.getElementById('smsInput');
+          smsInput.value = '123456'; // Example code, replace with real value
+          // Add review button
+          const reviewBtn = document.createElement('a');
+          reviewBtn.className = 'review-btn';
+          reviewBtn.href = 'https://discord.com/channels/1378833366916530337/1381942658401828924';
+          reviewBtn.target = '_blank';
+          reviewBtn.innerHTML = '<i class="fa-solid fa-star"></i> Leave a review';
+          smsInput.parentElement.appendChild(reviewBtn);
+        }, 5000);
       }, 700);
+
+      // Timer countdown
+      let timer = expiry;
+      const timerCount = () => {
+        timer--;
+        if (timer >= 0) {
+          document.getElementById('timer-count').textContent = timer;
+          setTimeout(timerCount, 1000);
+        } else {
+          timerDiv.innerHTML = `<i class='fa-regular fa-clock'></i> Expired`;
+        }
+      };
+      setTimeout(timerCount, 1000);
+
+      // Immediately mark license as used
+      fetch('http://localhost:3000/redeem', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ license, simInfo })
+      });
     }
 
     function redeem(e) {
@@ -404,7 +499,7 @@
       .then(data => {
         if (data.valid) {
           document.getElementById('redeemForm').style.display = 'none';
-          showWooshAndSimInfo(data.simInfo);
+          showWooshAndSimInfo(data.simInfo, license);
         } else {
           messageBox.innerHTML = `<i class='fa-solid fa-circle-xmark'></i> ${data.message || 'Invalid license key.'}`;
           messageBox.classList.add('error');
