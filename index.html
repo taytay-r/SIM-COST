@@ -62,6 +62,36 @@
       max-width: 420px;
       backdrop-filter: blur(12px);
       position: relative;
+      overflow: hidden;
+    }
+    .shine {
+      position: absolute;
+      top: -60px;
+      left: -80px;
+      width: 180%;
+      height: 120px;
+      pointer-events: none;
+      background: linear-gradient(120deg, rgba(255,255,255,0) 60%, rgba(255,255,255,0.7) 80%, rgba(255,255,255,0) 100%);
+      transform: rotate(-10deg) translateX(-100%);
+      filter: blur(1.5px);
+      animation: shineMove 2.2s cubic-bezier(.4,2,.6,1) 1.2s forwards;
+      z-index: 10;
+    }
+    @keyframes shineMove {
+      0% {
+        transform: rotate(-10deg) translateX(-100%);
+        opacity: 0.2;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      60% {
+        opacity: 1;
+      }
+      100% {
+        transform: rotate(-10deg) translateX(60%);
+        opacity: 0;
+      }
     }
 
     .form-group {
@@ -242,6 +272,7 @@
     <span class="logo-text">Redemption Gateway</span>
   </div>
   <div class="container">
+    <div class="shine"></div>
     <form id="redeemForm" autocomplete="off" onsubmit="redeem(event)">
       <div class="form-group">
         <input type="text" id="license" class="form-input" placeholder=" " maxlength="64" autocomplete="off" required />
