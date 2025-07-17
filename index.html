@@ -68,13 +68,13 @@
       position: absolute;
       top: -60px;
       left: -80px;
-      width: 180%;
-      height: 120px;
+      width: 220%; /* increased from 180% */
+      height: 160px; /* increased from 120px */
       pointer-events: none;
       background: linear-gradient(120deg, rgba(255,255,255,0) 60%, rgba(255,255,255,0.7) 80%, rgba(255,255,255,0) 100%);
       transform: rotate(-10deg) translateX(-100%);
       filter: blur(1.5px);
-      animation: shineMove 2.2s cubic-bezier(.4,2,.6,1) 1.2s forwards;
+      animation: shineMove 2.8s cubic-bezier(.4,2,.6,1) 1.2s forwards; /* duration increased from 2.2s to 2.8s */
       z-index: 10;
     }
     @keyframes shineMove {
@@ -89,7 +89,7 @@
         opacity: 1;
       }
       100% {
-        transform: rotate(-10deg) translateX(60%);
+        transform: rotate(-10deg) translateX(80%); /* increased from 60% */
         opacity: 0;
       }
     }
