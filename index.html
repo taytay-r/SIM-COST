@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sellauth Redemption</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      background: #121212;
+      color: #eee;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: #1e1e1e;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 180, 0.3);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 15px;
+      font-weight: 600;
+      color: #00ffb3;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin-bottom: 25px;
+      color: #bbb;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1.1rem;
+      outline: none;
+      background: #333;
+      color: #eee;
+      box-sizing: border-box;
+      transition: box-shadow 0.2s ease;
+    }
+    input[type="text"]:focus {
+      box-shadow: 0 0 10px #00ffb3;
+      background: #222;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 15px 0;
+      border: none;
+      border-radius: 6px;
+      background: #00ffb3;
+      color: #121212;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #00cca1;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 1rem;
+      min-height: 24px;
+    }
+    .message.error {
+      color: #ff5555;
+    }
+    .message.success {
+      color: #55ff99;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Redeem Your Code</h1>
+    <p>Enter your Sellauth license or code below to unlock your product.</p>
+    <input type="text" id="licenseInput" placeholder="Enter your license or key" />
+    <button id="redeemBtn">Redeem</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const redeemBtn = document.getElementById('redeemBtn');
+    const licenseInput = document.getElementById('licenseInput');
+    const message = document.getElementById('message');
+
+    redeemBtn.addEventListener('click', () => {
+      const code = licenseInput.value.trim();
+      message.textContent = '';
+      message.className = 'message';
+
+      if (!code) {
+        message.textContent = 'Please enter a license or code.';
+        message.classList.add('error');
+        return;
+      }
+
+      // Simulate redemption process (replace with real API call)
+      message.textContent = 'Checking your code...';
+      message.classList.remove('error');
+      message.classList.remove('success');
+
+      setTimeout(() => {
+        // Dummy validation: accept if length > 5 chars
+        if (code.length > 5) {
+          message.textContent = 'Success! Your product is unlocked.';
+          message.classList.add('success');
+        } else {
+          message.textContent = 'Invalid code. Try again.';
+          message.classList.add('error');
+        }
+      }, 1500);
+    });
+
+    // Optional: submit on Enter key
+    licenseInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') redeemBtn.click();
+    });
+  </script>
+</body>
+</html>
