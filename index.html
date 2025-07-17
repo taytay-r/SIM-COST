@@ -28,13 +28,6 @@
       margin-bottom: 30px;
       animation: logoPop 1.2s cubic-bezier(.4,2,.6,1);
     }
-    .logo-icon {
-      font-size: 2.8rem;
-      color: #ffb347;
-      margin-right: 15px;
-      filter: drop-shadow(0 0 10px #ffb34799);
-      /* animation: spin 2.5s linear infinite; */
-    }
     .logo-text {
       font-family: 'Orbitron', sans-serif;
       font-size: 2.2rem;
@@ -46,21 +39,17 @@
       0% { opacity: 0; transform: scale(0.7); }
       100% { opacity: 1; transform: scale(1); }
     }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
 
     .container {
-      background: rgba(20, 0, 0, 0.35);
-      padding: 48px 32px 36px 32px;
-      border-radius: 18px;
-      box-shadow: 0 0 40px #ff000066, 0 0 100px #ff1a1a33 inset;
+      background: rgba(20, 0, 0, 0.45);
+      padding: 56px 36px 44px 36px;
+      border-radius: 24px;
+      box-shadow: 0 0 60px #ff000099, 0 0 120px #ff1a1a55 inset, 0 0 0 6px #ffb34722;
       text-align: center;
       animation: fadeIn 2s ease-in-out;
-      width: 95%;
-      max-width: 420px;
-      backdrop-filter: blur(12px);
+      width: 98%;
+      max-width: 540px;
+      backdrop-filter: blur(16px);
       position: relative;
       overflow: hidden;
     }
@@ -268,7 +257,7 @@
 </head>
 <body>
   <div class="logo">
-    <i class="fa-solid fa-shield-halved logo-icon"></i>
+    <!-- Shield icon removed -->
     <span class="logo-text">Redemption Gateway</span>
   </div>
   <div class="container">
