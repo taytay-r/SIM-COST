@@ -40,18 +40,25 @@
       letter-spacing: 4px;
       color: #fff199;
       text-shadow: 0 0 18px #ffb34788, 0 0 30px #ff1a1a44;
+      animation: flicker 2.5s infinite alternate;
     }
-    @keyframes logoPop {
-      0% { opacity: 0; transform: scale(0.7); }
-      100% { opacity: 1; transform: scale(1); }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; text-shadow: 0 0 18px #fff199cc;}
+      45% { opacity: 0.7; text-shadow: 0 0 24px #ff3c3c88;}
+      50% { opacity: 1; }
     }
     .container {
       background: rgba(30, 0, 0, 0.32);
       padding: 56px 36px 44px 36px;
       border-radius: 32px;
-      box-shadow: 0 8px 60px #ff000044, 0 0 140px #ff1a1a33 inset, 0 0 0 6px #fff19922;
+      box-shadow:
+        0 0 40px #fff199bb,
+        0 0 80px #ff3c3c55,
+        0 0 0 6px #fff19955 inset,
+        0 8px 60px #ff000044,
+        0 0 140px #ff1a1a33 inset;
       text-align: center;
-      animation: fadeIn 2s ease-in-out;
+      animation: fadeIn 2s ease-in-out, borderPulse 2.5s infinite alternate;
       width: 98%;
       max-width: 540px;
       backdrop-filter: blur(24px) saturate(160%);
@@ -60,6 +67,14 @@
       border: 3px solid #fff199;
       box-sizing: border-box;
       transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    @keyframes borderPulse {
+      0% { box-shadow: 0 0 40px #fff199bb, 0 0 80px #ff3c3c55, 0 0 0 6px #fff19955 inset, 0 8px 60px #ff000044, 0 0 140px #ff1a1a33 inset; }
+      100% { box-shadow: 0 0 60px #ff1a1a99, 0 0 120px #fff19933, 0 0 0 12px #ff3c3c33 inset, 0 8px 60px #ff000044, 0 0 140px #ff1a1a33 inset; }
+    }
+    .container:hover {
+      transform: perspective(800px) translateY(-8px) scale(1.04) rotateX(3deg);
+      box-shadow: 0 18px 60px #ff1a1a99, 0 0 160px #fff19944;
     }
     .shine {
       position: absolute;
@@ -368,33 +383,59 @@
       margin-top: 4px;
       box-shadow: 0 0 8px #ff1a1a22;
     }
-    .review-btn {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 12px 32px;
-      font-size: 1.18rem;
-      font-weight: bold;
-      color: #fff;
-      background: linear-gradient(90deg, #ff3c3c 0%, #ff1a1a 100%);
-      border-radius: 12px;
-      text-decoration: none;
-      box-shadow: 0 0 24px #ff1a1aaa, 0 0 60px #ff3c3c55 inset;
-      border: 2px solid #ff3c3c;
-      transition: all 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
-      outline: none;
-      cursor: pointer;
-      animation: reviewBounce 1.2s cubic-bezier(.4,2,.6,1);
+    .progress-bar {
+      display: flex; gap: 18px; margin-bottom: 28px; justify-content: center;
     }
-    @keyframes reviewBounce {
+    .progress-step {
+      font-family: 'Orbitron'; font-size: 1rem;
+      color: #fff19988; background: #ff1a1a22;
+      border-radius: 7px; padding: 7px 16px;
+      box-shadow: 0 0 10px #ff1a1a44 inset;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .progress-step.active {
+      color: #fff199; background: #ff1a1a99; box-shadow: 0 0 20px #fff19988;
+    }
+    .copy-btn {
+      background: linear-gradient(90deg,#fff199 0%, #ff3c3c 100%);
+      color: #330000; border-radius: 8px;
+      font-weight: 700; padding: 8px 22px;
+      box-shadow: 0 0 12px #ff1a1a44;
+      border: none; cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover {
+      background: linear-gradient(90deg,#ff3c3c 0%, #fff199 100%);
+    }
+    /* SMS code arrival animation */
+    .code-arrived {
+      box-shadow: 0 0 18px #fff199cc, 0 0 30px #ff3c3c88;
+      animation: shake 0.4s linear;
+    }
+    @keyframes shake {
+      0% { transform: translateX(0);}
+      25% { transform: translateX(-5px);}
+      50% { transform: translateX(5px);}
+      75% { transform: translateX(-3px);}
+      100% { transform: translateX(0);}
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes pop {
       0% { transform: scale(0.7); opacity: 0; }
-      60% { transform: scale(1.1); opacity: 1; }
       100% { transform: scale(1); opacity: 1; }
     }
-    .review-btn:hover {
-      background: linear-gradient(90deg, #ff1a1a 0%, #ff3c3c 100%);
-      box-shadow: 0 0 60px #ff1a1acc, 0 0 120px #ff3c3c99 inset, 0 0 80px #fff19944;
-      color: #330000;
-      border-color: #fff199;
+    @keyframes wooshIn {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+      60% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+      100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+    }
+    @keyframes borderPulse {
+      0% { box-shadow: 0 0 40px #fff199bb, 0 0 80px #ff3c3c55, 0 0 0 6px #fff19955 inset, 0 8px 60px #ff000044, 0 0 140px #ff1a1a33 inset; }
+      100% { box-shadow: 0 0 60px #ff1a1a99, 0 0 120px #fff19933, 0 0 0 12px #ff3c3c33 inset, 0 8px 60px #ff000044, 0 0 140px #ff1a1a33 inset; }
     }
   </style>
 </head>
@@ -404,6 +445,12 @@
     <span class="logo-text">Redemption Gateway</span>
   </div>
   <div class="container">
+    <div class="progress-bar">
+      <div class="progress-step active">Enter Key</div>
+      <div class="progress-step">Validate</div>
+      <div class="progress-step">Show Info</div>
+      <div class="progress-step">Review</div>
+    </div>
     <div class="shine"></div>
     <form id="redeemForm" autocomplete="off" onsubmit="redeem(event)">
       <div class="form-group">
@@ -456,6 +503,7 @@
           <div class='sms-code-box'>
             <span>SMS code will arrive here:</span>
             <input type='text' class='sms-input' id='smsInput' placeholder='Waiting for code...' readonly />
+            <button class='copy-btn' onclick='copySMS()'>Copy Code <i class='fa fa-copy'></i></button>
           </div>
         `;
         messageBox.appendChild(infoBox);
@@ -464,6 +512,8 @@
         setTimeout(() => {
           const smsInput = document.getElementById('smsInput');
           smsInput.value = '123456'; // Example code, replace with real value
+          smsInput.classList.add('code-arrived');
+          setTimeout(() => smsInput.classList.remove('code-arrived'), 1200);
           // Add review button
           const reviewBtn = document.createElement('a');
           reviewBtn.className = 'review-btn';
@@ -563,6 +613,20 @@
     container.addEventListener('mouseleave', () => {
       shine.style.opacity = '0';
     });
+    // Progress bar steps
+    function setProgress(step) {
+      const steps = document.querySelectorAll('.progress-step');
+      steps.forEach((el, i) => {
+        el.classList.toggle('active', i === step);
+      });
+    }
+    // Copy SMS code
+    function copySMS() {
+      const smsInput = document.getElementById('smsInput');
+      navigator.clipboard.writeText(smsInput.value);
+      smsInput.classList.add('code-arrived');
+      setTimeout(() => smsInput.classList.remove('code-arrived'), 900);
+    }
   </script>
 </body>
 </html>
