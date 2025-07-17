@@ -312,7 +312,7 @@
       })
       .then(res => res.json())
       .then(data => {
-        if (data.success) { // check 'success' instead of 'valid'
+        if (data.valid) { // check 'valid' as returned by server
           document.getElementById('redeemForm').style.display = 'none';
           messageBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> License accepted!';
           messageBox.classList.add('success');
