@@ -10,7 +10,9 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: radial-gradient(ellipse at center, #0d0d0d 0%, #000000 100%);
+      background: linear-gradient(120deg, #0d0d0d 0%, #2c0e0e 60%, #ff1a1a 100%);
+      animation: gradientMove 20s ease infinite;
+      background-size: 200% 200%;
       font-family: 'Roboto', 'Orbitron', sans-serif;
       color: #ff3c3c;
       display: flex;
@@ -20,7 +22,11 @@
       overflow-x: hidden;
       cursor: url('https://cdn.jsdelivr.net/gh/ionic-team/ionicons@7.1.0/src/svg/flash-outline.svg') 16 16, pointer;
     }
-
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
     .logo {
       display: flex;
       align-items: center;
@@ -30,29 +36,28 @@
     }
     .logo-text {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.2rem;
-      letter-spacing: 2px;
-      color: #ff1f1f;
-      text-shadow: 0 0 12px #ff1f1f, 0 0 30px #ffb34744;
+      font-size: 2.8rem;
+      letter-spacing: 4px;
+      color: #fff199;
+      text-shadow: 0 0 18px #ffb34788, 0 0 30px #ff1a1a44;
     }
     @keyframes logoPop {
       0% { opacity: 0; transform: scale(0.7); }
       100% { opacity: 1; transform: scale(1); }
     }
-
     .container {
-      background: rgba(20, 0, 0, 0.45);
+      background: rgba(30, 0, 0, 0.32);
       padding: 56px 36px 44px 36px;
-      border-radius: 24px;
-      box-shadow: 0 0 60px #ff000099, 0 0 120px #ff1a1a55 inset, 0 0 0 6px #ffb34722;
+      border-radius: 32px;
+      box-shadow: 0 8px 60px #ff000044, 0 0 140px #ff1a1a33 inset, 0 0 0 6px #fff19922;
       text-align: center;
       animation: fadeIn 2s ease-in-out;
       width: 98%;
       max-width: 540px;
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(24px) saturate(160%);
       position: relative;
       overflow: hidden;
-      border: 3px solid #ffb347;
+      border: 3px solid #fff199;
       box-sizing: border-box;
       transition: box-shadow 0.2s, border-color 0.2s;
     }
@@ -60,13 +65,13 @@
       position: absolute;
       top: -60px;
       left: -80px;
-      width: 220%; /* increased from 180% */
-      height: 160px; /* increased from 120px */
+      width: 220%;
+      height: 160px;
       pointer-events: none;
       background: linear-gradient(120deg, rgba(255,255,255,0) 60%, rgba(255,255,255,0.7) 80%, rgba(255,255,255,0) 100%);
       transform: rotate(-10deg) translateX(-100%);
-      filter: blur(1.5px);
-      animation: shineMove 2.8s cubic-bezier(.4,2,.6,1) 1.2s forwards; /* duration increased from 2.2s to 2.8s */
+      filter: blur(2.5px);
+      animation: shineMove 2.8s cubic-bezier(.4,2,.6,1) 1.2s forwards;
       z-index: 10;
       opacity: 0;
     }
@@ -86,11 +91,10 @@
         opacity: 1;
       }
       100% {
-        transform: rotate(-10deg) translateX(80%); /* increased from 60% */
+        transform: rotate(-10deg) translateX(80%);
         opacity: 0;
       }
     }
-
     .form-group {
       position: relative;
       margin-bottom: 32px;
@@ -99,8 +103,8 @@
       flex-direction: column;
       align-items: center;
       background: rgba(30, 0, 0, 0.7);
-      border: 2px solid #ffb347;
-      border-radius: 12px;
+      border: 2px solid #fff199;
+      border-radius: 18px;
       box-shadow: 0 0 18px #ff1a1a44 inset;
       padding: 24px 0 16px 0;
       margin-top: 18px;
@@ -110,12 +114,12 @@
       width: 90%;
       border: 2px solid #ffb34744;
       border-radius: 7px;
-      font-size: 1.08rem;
+      font-size: 1.18rem;
       background: #1a0000cc;
       color: #ffb3b3;
       box-shadow: 0 0 12px #33000033;
       outline: none;
-      transition: border 0.2s, box-shadow 0.2s;
+      transition: border 0.2s, box-shadow 0.2s, background 0.2s;
       margin-bottom: 8px;
       box-sizing: border-box;
     }
@@ -125,55 +129,63 @@
       width: 80%;
       text-align: left;
       color: #ffb347;
-      font-size: 1.1rem;
+      font-size: 1.18rem;
       font-family: 'Orbitron', sans-serif;
       background: transparent;
       margin-bottom: 0;
       position: static;
       padding: 0;
       box-shadow: none;
+      transition: color 0.2s, transform 0.2s, font-size 0.2s;
+    }
+    .form-input:focus {
+      border-color: #fff199;
+      box-shadow: 0 0 20px #ffb34799;
+      background: #2d0000cc;
+    }
+    .form-input:focus + .form-label {
+      color: #fff199;
+      transform: translateY(-18px) scale(0.95);
+      font-size: 1.08rem;
     }
     .btn {
       margin-top: 18px;
-      width: 220px;
-      font-size: 1.15rem;
-      /* Center button */
+      width: 240px;
+      font-size: 1.25rem;
       display: block;
       margin-left: auto;
       margin-right: auto;
-    }
-    .btn {
       position: relative;
       overflow: hidden;
-      padding: 14px 36px;
+      padding: 16px 40px;
       border: none;
-      border-radius: 7px;
-      font-size: 1.08rem;
+      border-radius: 12px;
       font-weight: bold;
       cursor: url('https://cdn.jsdelivr.net/gh/ionic-team/ionicons@7.1.0/src/svg/rocket-outline.svg') 16 16, pointer;
-      background: linear-gradient(90deg, #ff1a1a 0%, #ffb347 100%);
-      color: #000;
-      box-shadow: 0 0 18px #ff0000aa, 0 0 50px #ffb34755 inset;
+      background: linear-gradient(90deg, #ff1a1a 0%, #fff199 100%);
+      color: #330000;
+      box-shadow: 0 0 24px #ff0000aa, 0 0 60px #fff19955 inset;
       transition: all 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
       z-index: 1;
       outline: none;
-      border: 2px solid #ffb347;
+      border: 2px solid #fff199;
       animation: buttonGlow 2s infinite alternate;
       margin-bottom: 10px;
+      letter-spacing: 2px;
     }
     @keyframes buttonGlow {
-      0% { box-shadow: 0 0 18px #ff0000aa, 0 0 50px #ffb34755 inset; }
-      100% { box-shadow: 0 0 36px #ffb347cc, 0 0 100px #ff1a1a99 inset; }
+      0% { box-shadow: 0 0 24px #ff0000aa, 0 0 60px #fff19955 inset; }
+      100% { box-shadow: 0 0 48px #fff199cc, 0 0 120px #ff1a1a99 inset; }
     }
     .btn:hover {
-      background: linear-gradient(90deg, #ffb347 0%, #ff1a1a 100%);
-      box-shadow: 0 0 50px #ffb347cc, 0 0 100px #ff1a1a99 inset, 0 0 80px #fff19944;
+      background: linear-gradient(90deg, #fff199 0%, #ff1a1a 100%);
+      box-shadow: 0 0 60px #fff199cc, 0 0 120px #ff1a1a99 inset, 0 0 80px #fff19944;
       transform: scale(1.08) translateY(-2px);
       border-color: #fff199;
     }
     .btn:active {
-      background: linear-gradient(90deg, #ff1a1a 0%, #ffb347 100%);
-      box-shadow: 0 0 12px #ffb347cc, 0 0 30px #ff1a1a99 inset;
+      background: linear-gradient(90deg, #ff1a1a 0%, #fff199 100%);
+      box-shadow: 0 0 18px #fff199cc, 0 0 40px #ff1a1a99 inset;
       transform: scale(0.98) translateY(2px);
       border-color: #ff1a1a;
     }
@@ -192,22 +204,20 @@
         opacity: 0;
       }
     }
-
     .spinner {
       display: inline-block;
       width: 28px;
       height: 28px;
-      border: 3px solid #ffb34744;
-      border-top: 3px solid #ffb347;
+      border: 3px solid #fff19944;
+      border-top: 3px solid #fff199;
       border-radius: 50%;
       animation: spin 1s linear infinite;
       margin: 0 8px -6px 0;
       vertical-align: middle;
     }
-
     .message {
       margin-top: 28px;
-      font-size: 1.08rem;
+      font-size: 1.18rem;
       opacity: 0;
       transition: opacity 0.4s cubic-bezier(.4,2,.6,1), transform 0.4s cubic-bezier(.4,2,.6,1);
       min-height: 32px;
@@ -221,8 +231,8 @@
       transform: translateY(0);
     }
     .message.success {
-      color: #66ff66;
-      text-shadow: 0 0 7px #33ff33;
+      color: #fff199;
+      text-shadow: 0 0 7px #ff1a1a;
       animation: popSuccess 0.7s cubic-bezier(.4,2,.6,1);
     }
     .message.error {
@@ -242,7 +252,6 @@
       font-size: 1.3em;
       margin-right: 4px;
     }
-
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -253,11 +262,10 @@
         transform: scale(1);
       }
     }
-
     .footer {
       margin-top: 40px;
-      color: #ffb3b3aa;
-      font-size: 0.98rem;
+      color: #fff199aa;
+      font-size: 1.08rem;
       text-align: center;
       letter-spacing: 1px;
       user-select: none;
@@ -265,23 +273,22 @@
     }
     @media (max-width: 600px) {
       .container { padding: 28px 8px 24px 8px; }
-      .logo-text { font-size: 1.3rem; }
-      .logo-icon { font-size: 1.6rem; }
+      .logo-text { font-size: 1.7rem; }
+      .logo-icon { font-size: 2.2rem; }
     }
-
     .woosh-anim {
       position: absolute;
       left: 50%;
       top: 50%;
       width: 340px;
       height: 80px;
-      background: radial-gradient(circle at 50% 50%, #66ff66 0%, #00ff99 60%, transparent 100%);
+      background: radial-gradient(circle at 50% 50%, #ff3c3c 0%, #ff1a1a 60%, transparent 100%);
       transform: translate(-50%, -50%) scale(0.7);
       opacity: 1;
       z-index: 100;
       animation: wooshIn 0.7s cubic-bezier(.4,2,.6,1);
       border-radius: 40px;
-      box-shadow: 0 0 60px #00ff99cc, 0 0 120px #66ff6644;
+      box-shadow: 0 0 60px #ff1a1acc, 0 0 120px #ff3c3c44;
     }
     @keyframes wooshIn {
       0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
@@ -290,53 +297,53 @@
     }
     .sim-info-box {
       margin-top: 32px;
-      background: rgba(0,40,0,0.18);
-      border: 2px solid #66ff66;
-      border-radius: 18px;
-      box-shadow: 0 0 24px #00ff9944;
+      background: rgba(40,0,0,0.18);
+      border: 2px solid #ff3c3c;
+      border-radius: 24px;
+      box-shadow: 0 0 24px #ff1a1a44;
       padding: 28px 18px 18px 18px;
-      color: #66ff66;
-      font-size: 1.15rem;
+      color: #ff3c3c;
+      font-size: 1.18rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       animation: popSuccess 0.7s cubic-bezier(.4,2,.6,1);
     }
     .sim-label {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       margin-bottom: 18px;
-      color: #66ff66;
-      text-shadow: 0 0 7px #33ff33;
+      color: #ff3c3c;
+      text-shadow: 0 0 7px #ff1a1a;
       display: flex;
       align-items: center;
       gap: 8px;
     }
     .sim-number, .sim-send-box {
       margin-top: 10px;
-      font-size: 1.08rem;
+      font-size: 1.18rem;
       color: #fff;
-      background: #00330044;
-      border-radius: 8px;
+      background: #33000044;
+      border-radius: 12px;
       padding: 8px 16px;
-      box-shadow: 0 0 8px #00ff9922;
+      box-shadow: 0 0 8px #ff1a1a22;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     .sim-num {
       font-family: 'Orbitron', monospace;
-      font-size: 1.18rem;
-      color: #66ff66;
+      font-size: 1.28rem;
+      color: #ff3c3c;
       margin-top: 4px;
     }
     .expiry-timer {
-      font-size: 1.08rem;
+      font-size: 1.18rem;
       color: #fff;
-      background: #00330044;
-      border-radius: 8px;
+      background: #33000044;
+      border-radius: 12px;
       padding: 8px 16px;
       margin-bottom: 12px;
-      box-shadow: 0 0 8px #00ff9922;
+      box-shadow: 0 0 8px #ff1a1a22;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -352,35 +359,41 @@
     .sms-input {
       width: 180px;
       padding: 8px 12px;
-      font-size: 1.08rem;
+      font-size: 1.18rem;
       border-radius: 7px;
-      border: 2px solid #66ff66;
-      background: #002200cc;
-      color: #66ff66;
+      border: 2px solid #ff3c3c;
+      background: #330000cc;
+      color: #ff3c3c;
       text-align: center;
       margin-top: 4px;
-      box-shadow: 0 0 8px #00ff9922;
+      box-shadow: 0 0 8px #ff1a1a22;
     }
     .review-btn {
       display: inline-block;
       margin-top: 18px;
-      padding: 10px 28px;
-      font-size: 1.08rem;
+      padding: 12px 32px;
+      font-size: 1.18rem;
       font-weight: bold;
       color: #fff;
-      background: linear-gradient(90deg, #66ff66 0%, #00ff99 100%);
-      border-radius: 8px;
+      background: linear-gradient(90deg, #ff3c3c 0%, #ff1a1a 100%);
+      border-radius: 12px;
       text-decoration: none;
-      box-shadow: 0 0 18px #00ff99aa, 0 0 50px #66ff6655 inset;
-      border: 2px solid #66ff66;
+      box-shadow: 0 0 24px #ff1a1aaa, 0 0 60px #ff3c3c55 inset;
+      border: 2px solid #ff3c3c;
       transition: all 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
       outline: none;
       cursor: pointer;
+      animation: reviewBounce 1.2s cubic-bezier(.4,2,.6,1);
+    }
+    @keyframes reviewBounce {
+      0% { transform: scale(0.7); opacity: 0; }
+      60% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
     }
     .review-btn:hover {
-      background: linear-gradient(90deg, #00ff99 0%, #66ff66 100%);
-      box-shadow: 0 0 50px #00ff99cc, 0 0 100px #66ff6699 inset, 0 0 80px #fff19944;
-      color: #003300;
+      background: linear-gradient(90deg, #ff1a1a 0%, #ff3c3c 100%);
+      box-shadow: 0 0 60px #ff1a1acc, 0 0 120px #ff3c3c99 inset, 0 0 80px #fff19944;
+      color: #330000;
       border-color: #fff199;
     }
   </style>
@@ -435,7 +448,7 @@
         const infoBox = document.createElement('div');
         infoBox.className = 'sim-info-box';
         infoBox.innerHTML = `
-          <div class='sim-label'><i class="fa-solid fa-circle-check"></i> License accepted!</div>
+          <div class='sim-label'><i class="fa-solid fa-circle-check" style="color:#ff3c3c;"></i> License accepted!</div>
           <div class='sim-number'>
             <span>Phone Number:</span>
             <span class='sim-num'>+${simInfo.cc} ${simInfo.phonenumber}</span>
