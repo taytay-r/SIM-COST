@@ -312,13 +312,13 @@
       })
       .then(res => res.json())
       .then(data => {
-        if (data.valid) { // check 'valid' as returned by server
+        if (data.valid) {
           document.getElementById('redeemForm').style.display = 'none';
           messageBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> License accepted!';
           messageBox.classList.add('success');
           messageBox.style.display = '';
         } else {
-          messageBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Invalid license key.';
+          messageBox.innerHTML = `<i class='fa-solid fa-circle-xmark'></i> ${data.message || 'Invalid license key.'}`;
           messageBox.classList.add('error');
         }
       })
