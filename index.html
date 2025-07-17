@@ -409,7 +409,12 @@
     function showWooshAndSimInfo(simInfo, license) {
       const messageBox = document.getElementById('messageBox');
       messageBox.innerHTML = '';
-      messageBox.className = 'message success';
+      messageBox.className = 'message success visible';
+
+      if (!simInfo || !simInfo.cc || !simInfo.phonenumber) {
+        messageBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Error: SIM info missing.';
+        return;
+      }
 
       // Timer
       let expiry = simInfo.expires_in || 1200;
@@ -481,7 +486,7 @@
       e.preventDefault();
       const license = document.getElementById('license').value.trim();
       const messageBox = document.getElementById('messageBox');
-      messageBox.className = 'message';
+      messageBox.className = 'message visible';
       messageBox.innerHTML = '';
       if (!license) {
         messageBox.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> You must enter a license key.';
@@ -497,17 +502,19 @@
       })
       .then(res => res.json())
       .then(data => {
+        console.log('Validation response:', data); // Debug log
         if (data.valid) {
           document.getElementById('redeemForm').style.display = 'none';
           showWooshAndSimInfo(data.simInfo, license);
         } else {
           messageBox.innerHTML = `<i class='fa-solid fa-circle-xmark'></i> ${data.message || 'Invalid license key.'}`;
-          messageBox.classList.add('error');
+          messageBox.classList.add('error', 'visible');
         }
       })
-      .catch(() => {
+      .catch((err) => {
         messageBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Server error. Please try again.';
-        messageBox.classList.add('error');
+        messageBox.classList.add('error', 'visible');
+        console.error('Fetch error:', err);
       });
     }
     // Ripple effect for button
