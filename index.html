@@ -269,6 +269,66 @@
       .logo-icon { font-size: 1.6rem; }
     }
 
+    .woosh-anim {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 340px;
+      height: 80px;
+      background: radial-gradient(circle at 50% 50%, #66ff66 0%, #00ff99 60%, transparent 100%);
+      transform: translate(-50%, -50%) scale(0.7);
+      opacity: 1;
+      z-index: 100;
+      animation: wooshIn 0.7s cubic-bezier(.4,2,.6,1);
+      border-radius: 40px;
+      box-shadow: 0 0 60px #00ff99cc, 0 0 120px #66ff6644;
+    }
+    @keyframes wooshIn {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+      60% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+      100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+    }
+    .sim-info-box {
+      margin-top: 32px;
+      background: rgba(0,40,0,0.18);
+      border: 2px solid #66ff66;
+      border-radius: 18px;
+      box-shadow: 0 0 24px #00ff9944;
+      padding: 28px 18px 18px 18px;
+      color: #66ff66;
+      font-size: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: popSuccess 0.7s cubic-bezier(.4,2,.6,1);
+    }
+    .sim-label {
+      font-size: 1.25rem;
+      margin-bottom: 18px;
+      color: #66ff66;
+      text-shadow: 0 0 7px #33ff33;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sim-number, .sim-send-box {
+      margin-top: 10px;
+      font-size: 1.08rem;
+      color: #fff;
+      background: #00330044;
+      border-radius: 8px;
+      padding: 8px 16px;
+      box-shadow: 0 0 8px #00ff9922;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sim-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.18rem;
+      color: #66ff66;
+      margin-top: 4px;
+    }
   </style>
 </head>
 <body>
@@ -292,6 +352,36 @@
     &copy; 2025 Redemption Gateway. All rights reserved.
   </div>
   <script>
+    function showWooshAndSimInfo(simInfo) {
+      const messageBox = document.getElementById('messageBox');
+      messageBox.innerHTML = '';
+      messageBox.className = 'message success';
+
+      // Create woosh animation
+      const woosh = document.createElement('div');
+      woosh.className = 'woosh-anim';
+      messageBox.appendChild(woosh);
+
+      setTimeout(() => {
+        woosh.style.opacity = '0';
+        // Show phone number and code box
+        const infoBox = document.createElement('div');
+        infoBox.className = 'sim-info-box';
+        infoBox.innerHTML = `
+          <div class='sim-label'><i class="fa-solid fa-circle-check"></i> License accepted!</div>
+          <div class='sim-number'>
+            <span>Phone Number:</span>
+            <span class='sim-num'>+${simInfo.cc} ${simInfo.phonenumber}</span>
+          </div>
+          <div class='sim-send-box'>
+            <span>Code will be sent to:</span>
+            <span class='sim-num'>+${simInfo.cc} ${simInfo.phonenumber}</span>
+          </div>
+        `;
+        messageBox.appendChild(infoBox);
+      }, 700);
+    }
+
     function redeem(e) {
       e.preventDefault();
       const license = document.getElementById('license').value.trim();
@@ -314,9 +404,7 @@
       .then(data => {
         if (data.valid) {
           document.getElementById('redeemForm').style.display = 'none';
-          messageBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> License accepted!';
-          messageBox.classList.add('success');
-          messageBox.style.display = '';
+          showWooshAndSimInfo(data.simInfo);
         } else {
           messageBox.innerHTML = `<i class='fa-solid fa-circle-xmark'></i> ${data.message || 'Invalid license key.'}`;
           messageBox.classList.add('error');
