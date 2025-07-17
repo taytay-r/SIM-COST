@@ -36,45 +36,110 @@
     }
     .logo-text {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.8rem;
-      letter-spacing: 4px;
+      font-size: 2.1rem;
+      letter-spacing: 3px;
       color: #fff199;
-      text-shadow: 0 0 18px #ffb34788, 0 0 30px #ff1a1a44;
-      animation: flicker 2.5s infinite alternate;
-    }
-    @keyframes flicker {
-      0%, 100% { opacity: 1; text-shadow: 0 0 18px #fff199cc;}
-      45% { opacity: 0.7; text-shadow: 0 0 24px #ff3c3c88;}
-      50% { opacity: 1; }
+      text-shadow: 0 0 10px #ffb34744, 0 0 18px #ff1a1a22;
+      animation: none;
     }
     .container {
-      background: rgba(30, 0, 0, 0.32);
-      padding: 56px 36px 44px 36px;
-      border-radius: 32px;
-      box-shadow:
-        0 0 40px #fff199bb,
-        0 0 80px #ff3c3c55,
-        0 0 0 6px #fff19955 inset,
-        0 8px 60px #ff000044,
-        0 0 140px #ff1a1a33 inset;
+      background: rgba(30, 0, 0, 0.18);
+      padding: 36px 16px 28px 16px;
+      border-radius: 24px;
+      box-shadow: 0 0 40px #ff1a1a33 inset, 0 0 12px #fff19933;
       text-align: center;
-      animation: fadeIn 2s ease-in-out, borderPulse 2.5s infinite alternate;
+      animation: fadeIn 1.2s cubic-bezier(.4,2,.6,1);
       width: 98%;
-      max-width: 540px;
-      backdrop-filter: blur(24px) saturate(160%);
+      max-width: 420px;
+      backdrop-filter: blur(7px) saturate(120%);
       position: relative;
       overflow: hidden;
-      border: 3px solid #fff199;
+      border: 2px solid #fff199;
       box-sizing: border-box;
       transition: box-shadow 0.2s, border-color 0.2s;
     }
-    @keyframes borderPulse {
-      0% { box-shadow: 0 0 40px #fff199bb, 0 0 80px #ff3c3c55, 0 0 0 6px #fff19955 inset, 0 8px 60px #ff000044, 0 0 140px #ff1a1a33 inset; }
-      100% { box-shadow: 0 0 60px #ff1a1a99, 0 0 120px #fff19933, 0 0 0 12px #ff3c3c33 inset, 0 8px 60px #ff000044, 0 0 140px #ff1a1a33 inset; }
-    }
     .container:hover {
-      transform: perspective(800px) translateY(-8px) scale(1.04) rotateX(3deg);
-      box-shadow: 0 18px 60px #ff1a1a99, 0 0 160px #fff19944;
+      transform: none;
+      box-shadow: 0 0 40px #ff1a1a33 inset, 0 0 12px #fff19933;
+    }
+    .timer-top {
+      font-size: 1.08rem;
+      padding: 7px 12px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      margin-top: 0;
+      background: rgba(40,0,0,0.22);
+      border: 1.5px solid #ff3c3c;
+      color: #fff199;
+      box-shadow: 0 0 8px #ff1a1a22;
+      max-width: 260px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #ff1a1a22 inset;
+      padding: 14px 0 10px 0;
+      margin-top: 10px;
+      background: rgba(30, 0, 0, 0.5);
+      border: 1.5px solid #fff199;
+    }
+    .form-input {
+      padding: 12px 10px 12px 10px;
+      width: 92%;
+      border: 1.5px solid #ffb34744;
+      border-radius: 5px;
+      font-size: 1.02rem;
+      background: #1a0000b0;
+      color: #ffb3b3;
+      box-shadow: 0 0 6px #33000022;
+      margin-bottom: 4px;
+    }
+    .form-label {
+      color: #ffb347;
+      font-size: 1.02rem;
+      font-family: 'Orbitron', sans-serif;
+      background: transparent;
+      margin-bottom: 0;
+      position: static;
+      padding: 0;
+      box-shadow: none;
+      transition: color 0.2s, transform 0.2s, font-size 0.2s;
+    }
+    .form-input:focus {
+      border-color: #fff199;
+      box-shadow: 0 0 10px #ffb34755;
+      background: #2d0000b0;
+    }
+    .form-input:focus + .form-label {
+      color: #fff199;
+      transform: translateY(-10px) scale(0.97);
+      font-size: 0.98rem;
+    }
+    .btn {
+      margin-top: 10px;
+      width: 180px;
+      font-size: 1.08rem;
+      padding: 10px 24px;
+      border-radius: 7px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #ff1a1a 0%, #fff199 100%);
+      color: #330000;
+      box-shadow: 0 0 12px #ff0000aa, 0 0 24px #fff19933 inset;
+      border: 1.5px solid #fff199;
+      animation: none;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #fff199 0%, #ff1a1a 100%);
+      box-shadow: 0 0 24px #fff199cc, 0 0 40px #ff1a1a33 inset;
+      border-color: #fff199;
+    }
+    .btn:active {
+      background: linear-gradient(90deg, #ff1a1a 0%, #fff199 100%);
+      box-shadow: 0 0 8px #fff199cc, 0 0 20px #ff1a1a33 inset;
+      border-color: #ff1a1a;
     }
     .shine {
       position: absolute;
@@ -109,126 +174,6 @@
         transform: rotate(-10deg) translateX(80%);
         opacity: 0;
       }
-    }
-    .form-group {
-      position: relative;
-      margin-bottom: 32px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: rgba(30, 0, 0, 0.7);
-      border: 2px solid #fff199;
-      border-radius: 18px;
-      box-shadow: 0 0 18px #ff1a1a44 inset;
-      padding: 24px 0 16px 0;
-      margin-top: 18px;
-    }
-    .form-input {
-      padding: 18px 16px 18px 16px;
-      width: 90%;
-      border: 2px solid #ffb34744;
-      border-radius: 7px;
-      font-size: 1.18rem;
-      background: #1a0000cc;
-      color: #ffb3b3;
-      box-shadow: 0 0 12px #33000033;
-      outline: none;
-      transition: border 0.2s, box-shadow 0.2s, background 0.2s;
-      margin-bottom: 8px;
-      box-sizing: border-box;
-    }
-    .form-label {
-      left: 24px;
-      top: 22px;
-      width: 80%;
-      text-align: left;
-      color: #ffb347;
-      font-size: 1.18rem;
-      font-family: 'Orbitron', sans-serif;
-      background: transparent;
-      margin-bottom: 0;
-      position: static;
-      padding: 0;
-      box-shadow: none;
-      transition: color 0.2s, transform 0.2s, font-size 0.2s;
-    }
-    .form-input:focus {
-      border-color: #fff199;
-      box-shadow: 0 0 20px #ffb34799;
-      background: #2d0000cc;
-    }
-    .form-input:focus + .form-label {
-      color: #fff199;
-      transform: translateY(-18px) scale(0.95);
-      font-size: 1.08rem;
-    }
-    .btn {
-      margin-top: 18px;
-      width: 240px;
-      font-size: 1.25rem;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-      overflow: hidden;
-      padding: 16px 40px;
-      border: none;
-      border-radius: 12px;
-      font-weight: bold;
-      cursor: url('https://cdn.jsdelivr.net/gh/ionic-team/ionicons@7.1.0/src/svg/rocket-outline.svg') 16 16, pointer;
-      background: linear-gradient(90deg, #ff1a1a 0%, #fff199 100%);
-      color: #330000;
-      box-shadow: 0 0 24px #ff0000aa, 0 0 60px #fff19955 inset;
-      transition: all 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
-      z-index: 1;
-      outline: none;
-      border: 2px solid #fff199;
-      animation: buttonGlow 2s infinite alternate;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-    }
-    @keyframes buttonGlow {
-      0% { box-shadow: 0 0 24px #ff0000aa, 0 0 60px #fff19955 inset; }
-      100% { box-shadow: 0 0 48px #fff199cc, 0 0 120px #ff1a1a99 inset; }
-    }
-    .btn:hover {
-      background: linear-gradient(90deg, #fff199 0%, #ff1a1a 100%);
-      box-shadow: 0 0 60px #fff199cc, 0 0 120px #ff1a1a99 inset, 0 0 80px #fff19944;
-      transform: scale(1.08) translateY(-2px);
-      border-color: #fff199;
-    }
-    .btn:active {
-      background: linear-gradient(90deg, #ff1a1a 0%, #fff199 100%);
-      box-shadow: 0 0 18px #fff199cc, 0 0 40px #ff1a1a99 inset;
-      transform: scale(0.98) translateY(2px);
-      border-color: #ff1a1a;
-    }
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      transform: scale(0);
-      animation: ripple 0.6s linear;
-      background: rgba(255, 255, 255, 0.5);
-      pointer-events: none;
-      z-index: 2;
-    }
-    @keyframes ripple {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
-    .spinner {
-      display: inline-block;
-      width: 28px;
-      height: 28px;
-      border: 3px solid #fff19944;
-      border-top: 3px solid #fff199;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 8px -6px 0;
-      vertical-align: middle;
     }
     .message {
       margin-top: 28px;
@@ -278,13 +223,13 @@
       }
     }
     .footer {
-      margin-top: 40px;
-      color: #fff199aa;
-      font-size: 1.08rem;
+      margin-top: 24px;
+      color: #fff19999;
+      font-size: 0.98rem;
       text-align: center;
       letter-spacing: 1px;
       user-select: none;
-      text-shadow: 0 0 6px #ff1a1a22;
+      text-shadow: 0 0 2px #ff1a1a11;
     }
     @media (max-width: 600px) {
       .container { padding: 28px 8px 24px 8px; }
