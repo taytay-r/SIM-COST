@@ -9,7 +9,7 @@
 
     body {
       margin: 0;
-      background: linear-gradient(135deg, #330000, #660000);
+      background: linear-gradient(135deg, #0a0000, #1a0000);
       color: #fff;
       font-family: 'Poppins', sans-serif;
       display: flex;
@@ -20,16 +20,16 @@
     }
 
     .container {
-      background: rgba(40, 0, 0, 0.85);
+      background: rgba(20, 0, 0, 0.9);
       padding: 50px 60px;
       border-radius: 20px;
       max-width: 450px;
       width: 100%;
       box-shadow:
-        0 0 20px 5px #ff4444,
-        0 0 40px 10px #cc2222;
+        0 0 30px 10px rgba(255, 30, 30, 0.2),
+        0 0 60px 15px rgba(90, 0, 0, 0.4);
       text-align: center;
-      animation: pulseGlow 3s infinite alternate;
+      animation: pulseGlow 4s ease-in-out infinite alternate;
       position: relative;
       z-index: 1;
     }
@@ -37,115 +37,115 @@
     @keyframes pulseGlow {
       0% {
         box-shadow:
-          0 0 20px 5px #ff4444,
-          0 0 40px 10px #cc2222;
+          0 0 25px 5px rgba(255, 20, 20, 0.2),
+          0 0 50px 15px rgba(60, 0, 0, 0.3);
       }
       100% {
         box-shadow:
-          0 0 30px 8px #ff2222,
-          0 0 50px 15px #aa1111;
+          0 0 40px 15px rgba(255, 0, 0, 0.3),
+          0 0 70px 20px rgba(80, 0, 0, 0.5);
       }
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 2.8rem;
       margin-bottom: 10px;
       text-transform: uppercase;
-      letter-spacing: 4px;
+      letter-spacing: 3px;
       text-shadow:
-        0 0 8px #ff0000,
-        0 0 20px #ff5555;
+        0 0 8px #770000,
+        0 0 20px #ff0000;
       user-select: none;
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       margin-bottom: 35px;
-      color: #ffbbbb;
-      text-shadow: 0 0 5px #660000;
+      color: #ddaaaa;
+      text-shadow: 0 0 5px #2a0000;
     }
 
     input[type="text"] {
       width: 100%;
-      padding: 20px 25px;
-      font-size: 1.3rem;
-      border-radius: 15px;
+      padding: 18px 22px;
+      font-size: 1.2rem;
+      border-radius: 12px;
       border: none;
       outline: none;
-      background: #330000;
+      background: #1c0000;
       color: #fff;
       box-shadow:
-        inset 0 0 10px #660000,
-        0 0 8px #ff4444;
+        inset 0 0 12px #550000,
+        0 0 6px #880000;
       transition: all 0.3s ease;
     }
     input[type="text"]:focus {
-      background: #440000;
+      background: #260000;
       box-shadow:
-        inset 0 0 15px #ff2222,
-        0 0 15px #ff5555;
-      color: #fff;
+        inset 0 0 15px #ff1111,
+        0 0 12px #cc3333;
     }
 
     button {
       margin-top: 30px;
       width: 100%;
-      padding: 22px 0;
-      font-size: 1.5rem;
+      padding: 20px 0;
+      font-size: 1.4rem;
       font-weight: 700;
-      color: #330000;
-      background: linear-gradient(90deg, #ff4444, #cc2222);
+      color: #fff;
+      background: linear-gradient(90deg, #770000, #aa0000);
       border: none;
-      border-radius: 15px;
+      border-radius: 12px;
       cursor: pointer;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       box-shadow:
-        0 0 20px #ff2222,
-        0 5px 10px #aa1111;
-      transition: all 0.35s ease;
-      user-select: none;
+        0 0 20px rgba(255, 0, 0, 0.3),
+        0 8px 15px rgba(100, 0, 0, 0.4);
+      transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      z-index: 1;
     }
+
     button::before {
       content: '';
       position: absolute;
-      top: 0; left: -75%;
+      top: 0;
+      left: -70%;
       width: 50%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.2);
       transform: skewX(-25deg);
       transition: left 0.5s ease;
-      z-index: 2;
     }
+
     button:hover::before {
-      left: 125%;
+      left: 130%;
     }
+
     button:hover {
-      background: linear-gradient(90deg, #ff6666, #dd3333);
+      background: linear-gradient(90deg, #990000, #cc2222);
       box-shadow:
-        0 0 30px #ff4444,
-        0 8px 20px #bb2222;
+        0 0 30px #ff2222,
+        0 8px 25px rgba(150, 0, 0, 0.5);
       color: #fff;
     }
 
     .message {
       margin-top: 25px;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       min-height: 30px;
       font-weight: 600;
-      text-shadow: 0 0 5px #330000;
+      text-shadow: 0 0 4px #2a0000;
       user-select: none;
     }
     .message.error {
-      color: #ff9999;
-      text-shadow: 0 0 10px #ff4444;
+      color: #ff6666;
+      text-shadow: 0 0 8px #770000;
     }
     .message.success {
-      color: #ffdddd;
-      text-shadow: 0 0 12px #ff8888;
+      color: #ffeeee;
+      text-shadow: 0 0 10px #dd6666;
     }
   </style>
 </head>
@@ -192,5 +192,8 @@
       if (e.key === 'Enter') redeemBtn.click();
     });
   </script>
+</body>
+</html>
+
 </body>
 </html>
