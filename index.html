@@ -437,6 +437,41 @@
       0% { box-shadow: 0 0 40px #fff199bb, 0 0 80px #ff3c3c55, 0 0 0 6px #fff19955 inset, 0 8px 60px #ff000044, 0 0 140px #ff1a1a33 inset; }
       100% { box-shadow: 0 0 60px #ff1a1a99, 0 0 120px #fff19933, 0 0 0 12px #ff3c3c33 inset, 0 8px 60px #ff000044, 0 0 140px #ff1a1a33 inset; }
     }
+    .timer-top {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 18px;
+      margin-top: -8px;
+      font-size: 1.22rem;
+      color: #fff199;
+      font-family: 'Orbitron', monospace;
+      background: rgba(40,0,0,0.38);
+      border-radius: 18px;
+      box-shadow: 0 0 20px #ff1a1a33 inset;
+      border: 2px solid #ff3c3c;
+      padding: 10px 24px;
+      min-height: 44px;
+      max-width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 2;
+      transition: background 0.2s, box-shadow 0.2s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .timer-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      animation: pop 0.7s cubic-bezier(.4,2,.6,1);
+    }
+    @keyframes pop {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -451,6 +486,7 @@
       <div class="progress-step">Show Info</div>
       <div class="progress-step">Review</div>
     </div>
+    <div class="timer-top" id="timerTop"></div>
     <div class="shine"></div>
     <form id="redeemForm" autocomplete="off" onsubmit="redeem(event)">
       <div class="form-group">
@@ -471,17 +507,16 @@
       messageBox.innerHTML = '';
       messageBox.className = 'message success visible';
 
+      // Move timer to top
+      const timerTop = document.getElementById('timerTop');
+      let expiry = simInfo.expires_in || 1200;
+      timerTop.innerHTML = `<i class='fa-regular fa-clock'></i> <span id='timer-count'>${expiry}</span> seconds until expiry`;
+      timerTop.classList.add('visible');
+
       if (!simInfo || !simInfo.cc || !simInfo.phonenumber) {
         messageBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Error: SIM info missing.';
         return;
       }
-
-      // Timer
-      let expiry = simInfo.expires_in || 1200;
-      const timerDiv = document.createElement('div');
-      timerDiv.className = 'expiry-timer';
-      timerDiv.innerHTML = `<i class='fa-regular fa-clock'></i> <span id='timer-count'>${expiry}</span> seconds until expiry`;
-      messageBox.appendChild(timerDiv);
 
       // Woosh animation
       const woosh = document.createElement('div');
@@ -532,7 +567,7 @@
           document.getElementById('timer-count').textContent = timer;
           setTimeout(timerCount, 1000);
         } else {
-          timerDiv.innerHTML = `<i class='fa-regular fa-clock'></i> Expired`;
+          timerTop.innerHTML = `<i class='fa-regular fa-clock'></i> Expired`;
         }
       };
       setTimeout(timerCount, 1000);
