@@ -10,93 +10,116 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: linear-gradient(120deg, #0d0d0d 0%, #2c0e0e 60%, #ff1a1a 100%);
-      animation: gradientMove 20s ease infinite;
+      background: radial-gradient(ellipse at 50% 40%, #1a0e0e 0%, #2c0e0e 70%, #ff1a1a 120%);
       background-size: 200% 200%;
+      animation: gradientMove 18s ease-in-out infinite;
       font-family: 'Roboto', 'Orbitron', sans-serif;
-      color: #ff3c3c;
+      color: #fff199;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       overflow-x: hidden;
-      cursor: url('https://cdn.jsdelivr.net/gh/ionic-team/ionicons@7.1.0/src/svg/flash-outline.svg') 16 16, pointer;
     }
     @keyframes gradientMove {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 30px;
-      animation: logoPop 1.2s cubic-bezier(.4,2,.6,1);
+      0%,100% {background-position: 0% 50%;}
+      50% {background-position: 100% 60%;}
     }
     .logo-text {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.1rem;
-      letter-spacing: 3px;
+      font-size: 2.5rem;
+      letter-spacing: 4px;
       color: #fff199;
-      text-shadow: 0 0 10px #ffb34744, 0 0 18px #ff1a1a22;
-      animation: none;
+      text-shadow: 0 0 18px #fff199cc, 0 0 32px #ff3c3c55, 0 0 4px #fff199cc;
+      font-weight: 700;
+      user-select: none;
+      margin-bottom: 10px;
+      animation: flicker 2.5s infinite alternate;
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; text-shadow: 0 0 18px #fff199cc, 0 0 32px #ff3c3c55;}
+      45% { opacity: 0.8; text-shadow: 0 0 24px #ff3c3c88;}
+      50% { opacity: 1; }
     }
     .container {
-      background: rgba(30, 0, 0, 0.18);
-      padding: 36px 16px 28px 16px;
-      border-radius: 24px;
-      box-shadow: 0 0 40px #ff1a1a33 inset, 0 0 12px #fff19933;
+      background: rgba(30, 0, 0, 0.32);
+      padding: 44px 24px 32px 24px;
+      border-radius: 28px;
+      box-shadow: 0 0 60px #ff1a1a55, 0 0 0 4px #fff19955 inset, 0 8px 40px #fff19922;
       text-align: center;
       animation: fadeIn 1.2s cubic-bezier(.4,2,.6,1);
       width: 98%;
-      max-width: 420px;
-      backdrop-filter: blur(7px) saturate(120%);
+      max-width: 480px;
+      backdrop-filter: blur(14px) saturate(140%);
       position: relative;
       overflow: hidden;
-      border: 2px solid #fff199;
+      border: 2.5px solid #fff199;
       box-sizing: border-box;
       transition: box-shadow 0.2s, border-color 0.2s;
     }
     .container:hover {
-      transform: none;
-      box-shadow: 0 0 40px #ff1a1a33 inset, 0 0 12px #fff19933;
+      box-shadow: 0 0 80px #fff199cc, 0 0 0 8px #ff3c3c44 inset, 0 8px 60px #ff1a1a33;
+      border-color: #fff199;
+    }
+    .progress-bar {
+      display: flex; gap: 18px; margin-bottom: 28px; justify-content: center;
+    }
+    .progress-step {
+      font-family: 'Orbitron'; font-size: 1.08rem;
+      color: #fff19988; background: #ff1a1a22;
+      border-radius: 9px; padding: 9px 20px;
+      box-shadow: 0 0 14px #ff1a1a44 inset, 0 0 8px #fff19933;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      border: 1.5px solid #fff19933;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 8px #fff19944;
+    }
+    .progress-step.active {
+      color: #fff199;
+      background: #ff1a1a99;
+      box-shadow: 0 0 24px #fff19988, 0 0 12px #ff3c3c55;
+      border-color: #fff199;
     }
     .timer-top {
-      font-size: 1.08rem;
-      padding: 7px 12px;
-      border-radius: 12px;
-      margin-bottom: 12px;
+      font-size: 1.13rem;
+      padding: 10px 18px;
+      border-radius: 14px;
+      margin-bottom: 18px;
       margin-top: 0;
-      background: rgba(40,0,0,0.22);
-      border: 1.5px solid #ff3c3c;
+      background: rgba(40,0,0,0.28);
+      border: 2px solid #ff3c3c;
       color: #fff199;
-      box-shadow: 0 0 8px #ff1a1a22;
-      max-width: 260px;
+      box-shadow: 0 0 12px #ff1a1a33;
+      max-width: 320px;
+      font-family: 'Orbitron', monospace;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px #fff19944;
     }
     .form-group {
-      margin-bottom: 18px;
-      border-radius: 10px;
-      box-shadow: 0 0 8px #ff1a1a22 inset;
-      padding: 14px 0 10px 0;
-      margin-top: 10px;
-      background: rgba(30, 0, 0, 0.5);
-      border: 1.5px solid #fff199;
+      margin-bottom: 22px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #ff1a1a22 inset, 0 0 8px #fff19922;
+      padding: 18px 0 12px 0;
+      margin-top: 14px;
+      background: rgba(30, 0, 0, 0.54);
+      border: 2px solid #fff199;
     }
     .form-input {
-      padding: 12px 10px 12px 10px;
+      padding: 14px 12px 14px 12px;
       width: 92%;
-      border: 1.5px solid #ffb34744;
-      border-radius: 5px;
-      font-size: 1.02rem;
-      background: #1a0000b0;
+      border: 2px solid #ffb34744;
+      border-radius: 7px;
+      font-size: 1.13rem;
+      background: #1a0000cc;
       color: #ffb3b3;
-      box-shadow: 0 0 6px #33000022;
-      margin-bottom: 4px;
+      box-shadow: 0 0 8px #33000033;
+      margin-bottom: 6px;
+      transition: border 0.2s, box-shadow 0.2s, background 0.2s;
     }
     .form-label {
       color: #ffb347;
-      font-size: 1.02rem;
+      font-size: 1.13rem;
       font-family: 'Orbitron', sans-serif;
       background: transparent;
       margin-bottom: 0;
@@ -107,38 +130,37 @@
     }
     .form-input:focus {
       border-color: #fff199;
-      box-shadow: 0 0 10px #ffb34755;
-      background: #2d0000b0;
+      box-shadow: 0 0 14px #ffb34755;
+      background: #2d0000cc;
     }
     .form-input:focus + .form-label {
       color: #fff199;
       transform: translateY(-10px) scale(0.97);
-      font-size: 0.98rem;
+      font-size: 1.08rem;
     }
     .btn {
-      margin-top: 10px;
-      width: 180px;
-      font-size: 1.08rem;
-      padding: 10px 24px;
-      border-radius: 7px;
+      margin-top: 14px;
+      width: 200px;
+      font-size: 1.18rem;
+      padding: 12px 30px;
+      border-radius: 9px;
       font-weight: bold;
       background: linear-gradient(90deg, #ff1a1a 0%, #fff199 100%);
       color: #330000;
-      box-shadow: 0 0 12px #ff0000aa, 0 0 24px #fff19933 inset;
-      border: 1.5px solid #fff199;
-      animation: none;
-      margin-bottom: 6px;
-      letter-spacing: 1px;
+      box-shadow: 0 0 18px #ff0000aa, 0 0 32px #fff19933 inset;
+      border: 2px solid #fff199;
+      margin-bottom: 10px;
+      letter-spacing: 1.5px;
       transition: background 0.2s, box-shadow 0.2s;
     }
     .btn:hover {
       background: linear-gradient(90deg, #fff199 0%, #ff1a1a 100%);
-      box-shadow: 0 0 24px #fff199cc, 0 0 40px #ff1a1a33 inset;
+      box-shadow: 0 0 32px #fff199cc, 0 0 60px #ff1a1a33 inset;
       border-color: #fff199;
     }
     .btn:active {
       background: linear-gradient(90deg, #ff1a1a 0%, #fff199 100%);
-      box-shadow: 0 0 8px #fff199cc, 0 0 20px #ff1a1a33 inset;
+      box-shadow: 0 0 12px #fff199cc, 0 0 24px #ff1a1a33 inset;
       border-color: #ff1a1a;
     }
     .shine {
@@ -223,13 +245,13 @@
       }
     }
     .footer {
-      margin-top: 24px;
-      color: #fff19999;
-      font-size: 0.98rem;
+      margin-top: 32px;
+      color: #fff199bb;
+      font-size: 1.08rem;
       text-align: center;
       letter-spacing: 1px;
       user-select: none;
-      text-shadow: 0 0 2px #ff1a1a11;
+      text-shadow: 0 0 8px #ff1a1a22;
     }
     @media (max-width: 600px) {
       .container { padding: 28px 8px 24px 8px; }
@@ -327,31 +349,6 @@
       text-align: center;
       margin-top: 4px;
       box-shadow: 0 0 8px #ff1a1a22;
-    }
-    .progress-bar {
-      display: flex; gap: 18px; margin-bottom: 28px; justify-content: center;
-    }
-    .progress-step {
-      font-family: 'Orbitron'; font-size: 1rem;
-      color: #fff19988; background: #ff1a1a22;
-      border-radius: 7px; padding: 7px 16px;
-      box-shadow: 0 0 10px #ff1a1a44 inset;
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-    }
-    .progress-step.active {
-      color: #fff199; background: #ff1a1a99; box-shadow: 0 0 20px #fff19988;
-    }
-    .copy-btn {
-      background: linear-gradient(90deg,#fff199 0%, #ff3c3c 100%);
-      color: #330000; border-radius: 8px;
-      font-weight: 700; padding: 8px 22px;
-      box-shadow: 0 0 12px #ff1a1a44;
-      border: none; cursor: pointer;
-      margin-top: 8px;
-      transition: background 0.2s;
-    }
-    .copy-btn:hover {
-      background: linear-gradient(90deg,#ff3c3c 0%, #fff199 100%);
     }
     /* SMS code arrival animation */
     .code-arrived {
@@ -454,9 +451,29 @@
 
       // Move timer to top
       const timerTop = document.getElementById('timerTop');
-      let expiry = simInfo.expires_in || 1200;
-      timerTop.innerHTML = `<i class='fa-regular fa-clock'></i> <span id='timer-count'>${expiry}</span> seconds until expiry`;
+      // Use server-provided expiry timestamp (absolute, in ms or ISO string)
+      let expiryTimestamp = simInfo.expiryTimestamp || simInfo.expiry || null;
+      if (!expiryTimestamp && simInfo.expires_in) {
+        // fallback for legacy: treat as seconds from now
+        expiryTimestamp = Date.now() + simInfo.expires_in * 1000;
+      }
+      if (!expiryTimestamp) expiryTimestamp = Date.now() + 1200 * 1000; // fallback 20 min
+
+      function updateTimer() {
+        const now = Date.now();
+        let secondsLeft = Math.floor((new Date(expiryTimestamp) - now) / 1000);
+        if (secondsLeft < 0) secondsLeft = 0;
+        document.getElementById('timer-count').textContent = secondsLeft;
+        if (secondsLeft > 0) {
+          setTimeout(updateTimer, 1000);
+        } else {
+          timerTop.innerHTML = `<i class='fa-regular fa-clock'></i> Expired`;
+        }
+      }
+
+      timerTop.innerHTML = `<i class='fa-regular fa-clock'></i> <span id='timer-count'></span> seconds until expiry`;
       timerTop.classList.add('visible');
+      updateTimer();
 
       if (!simInfo || !simInfo.cc || !simInfo.phonenumber) {
         messageBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Error: SIM info missing.';
@@ -503,19 +520,6 @@
           smsInput.parentElement.appendChild(reviewBtn);
         }, 5000);
       }, 700);
-
-      // Timer countdown
-      let timer = expiry;
-      const timerCount = () => {
-        timer--;
-        if (timer >= 0) {
-          document.getElementById('timer-count').textContent = timer;
-          setTimeout(timerCount, 1000);
-        } else {
-          timerTop.innerHTML = `<i class='fa-regular fa-clock'></i> Expired`;
-        }
-      };
-      setTimeout(timerCount, 1000);
 
       // Immediately mark license as used
       fetch('http://localhost:3000/redeem', {
